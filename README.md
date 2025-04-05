@@ -14,9 +14,11 @@ XRPL MCP Server acts as a bridge between large language models (LLMs) like Claud
 
 ## Installation
 
+### From Source
+
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/xrpl-mcp-server.git
+   git clone https://github.com/lgcarrier/xrpl-mcp-server.git
    cd xrpl-mcp-server
    ```
 
@@ -31,6 +33,12 @@ XRPL MCP Server acts as a bridge between large language models (LLMs) like Claud
    pip install -r requirements.txt
    ```
 
+### Using pip
+
+```
+pip install xrpl-mcp-server
+```
+
 ## Configuration
 
 The server uses the following environment variables:
@@ -39,20 +47,41 @@ The server uses the following environment variables:
 
 ## Usage
 
-Run the server:
+### Run from Source
+
+Launch the server:
 
 ```
-python src/server.py
+python -m xrpl_mcp_server
 ```
 
-### Using with Claude Desktop
+### Run as Installed Package
+
+```
+xrpl-mcp-server
+```
+
+### Using with Claude or Other MCP-Compatible AI Assistants
 
 1. Install the MCP:
    ```
-   mcp install /path/to/xrpl-mcp-server
+   mcp install xrpl-mcp-server
    ```
 
 2. The XRPL tools will be available to Claude, allowing you to ask for XRP Ledger account information.
+
+## Available Tools
+
+### get_account_info
+
+Retrieves information about an XRP Ledger account.
+
+**Parameters:**
+- `address` (string): The XRP Ledger account address (starts with "r")
+
+**Returns:**
+- Account balance in XRP
+- Account sequence number
 
 ## Examples
 
@@ -62,10 +91,23 @@ Ask Claude:
 
 Claude can then use the `get_account_info` tool to fetch this information directly from the XRP Ledger.
 
+Example response:
+```
+Account: rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe
+XRP Balance: 25.5
+Sequence: 123456
+```
+
 ## Development
 
 See the `memory-bank` directory for detailed documentation about architecture, coding rules, and implementation plans.
 
+To set up the development environment:
+
+```
+pip install -e ".[dev]"
+```
+
 ## License
 
-[Specify your license here]
+MIT License
