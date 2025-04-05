@@ -8,13 +8,13 @@
 - [x] Create connection to XRP Ledger via xrpl-py
 - [x] Implement get_account_info tool
 
-### Phase 2: Enhanced Features (Current)
-- [ ] Add transaction history retrieval
-- [ ] Implement transaction submission
-- [ ] Add NFT functionality
-- [ ] Create DEX price information tools
+### Phase 2: Enhanced Features (Completed)
+- [x] Add transaction history retrieval
+- [x] Implement transaction submission
+- [x] Add NFT functionality
+- [x] Create DEX price information tools
 
-### Phase 3: Advanced Capabilities
+### Phase 3: Advanced Capabilities (Current)
 - [ ] Add webhook support for ledger events
 - [ ] Implement WebSocket connection for real-time updates
 - [ ] Create multi-network support (testnet, devnet)
@@ -31,41 +31,43 @@
 | Milestone | Target Date | Status |
 |-----------|-------------|--------|
 | Core Account Info | Completed | ✓ |
-| Transaction Operations | TBD | 🚧 |
-| NFT Support | TBD | 📅 |
-| DEX Integration | TBD | 📅 |
+| Transaction Operations | Completed | ✓ |
+| NFT Support | Completed | ✓ |
+| DEX Integration | Completed | ✓ |
+| Real-time Updates | TBD | 📅 |
+| Multi-network Support | TBD | 📅 |
 
 ## Implementation Tasks
 
 ### Short-term Tasks
-1. Implement transaction history retrieval
-   - Query and format transaction history
-   - Add pagination support
-   - Handle different transaction types
+1. Implement WebSocket connection for real-time updates
+   - Set up WebSocket client
+   - Handle ledger event notifications
+   - Process account subscription messages
 
-2. Create transaction submission functionality
-   - Build transaction preparation helpers
-   - Implement submission logic
-   - Add result handling and verification
+2. Create multi-network support
+   - Add network selection functionality
+   - Configure connections to testnet and devnet
+   - Ensure consistent API across networks
 
 ### Medium-term Tasks
-1. Add NFT functionality
-   - NFT ownership lookup
-   - NFT metadata retrieval
-   - NFT transaction support
+1. Build transaction signing capabilities
+   - Implement secure key management
+   - Create transaction building helpers
+   - Add local signing functionality
 
-2. Implement DEX features
-   - Order book information
-   - Price data retrieval
-   - Trading pair lookup
+2. Develop webhook support
+   - Create webhook registration system
+   - Implement event notification delivery
+   - Add filtering and configuration options
 
 ## Technical Debt and Maintenance
 - Add comprehensive test suite
 - Improve error handling with more specific messages
 - Add detailed logging throughout the codebase
-- Create better documentation with examples
+- Enhance JSON response formatting for better readability
 
 ## Resource Planning
 - Development: 1 developer (part-time)
-- Testing: Manual testing for initial releases
-- Infrastructure: Local development with public node access
+- Testing: Manual testing for initial releases, automated tests for Phase 3
+- Infrastructure: Local development with public node access, planned testnet integration

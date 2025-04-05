@@ -27,13 +27,53 @@ The XRPL MCP Server is a Model Context Protocol (MCP) implementation that provid
 
 ### API Design
 
-The server exposes one primary tool through the MCP interface:
+The server exposes the following tools through the MCP interface:
 
 1. **get_account_info**: Retrieve account information from the XRP Ledger
    - Input: address (XRP Ledger account address)
    - Output: Formatted account information including balance and sequence
 
-The tool has detailed documentation to guide LLMs on appropriate usage.
+2. **get_account_lines**: Retrieve trust lines for an XRP Ledger account
+   - Input: 
+     - address (XRP Ledger account address)
+     - peer (optional, counterparty account address)
+     - limit (optional, number of trust lines to return)
+   - Output: JSON-formatted information about account trust lines
+
+3. **get_account_nfts**: Retrieve NFTs owned by an XRP Ledger account
+   - Input:
+     - address (XRP Ledger account address)
+     - limit (optional, number of NFTs to return) 
+   - Output: JSON-formatted information about account's NFTs
+
+4. **get_account_transactions**: Retrieve transaction history for an account
+   - Input:
+     - address (XRP Ledger account address)
+     - limit (optional, number of transactions to return)
+     - binary (optional, flag for binary format)
+     - forward (optional, flag to search forward in history)
+   - Output: JSON-formatted transaction history
+
+5. **get_server_info**: Retrieve information about the connected XRPL server
+   - Input: None
+   - Output: JSON-formatted server information
+
+6. **submit_transaction**: Submit a signed transaction to the XRP Ledger
+   - Input: tx_blob (signed transaction blob in hexadecimal)
+   - Output: JSON-formatted submission result
+
+7. **get_transaction_info**: Retrieve information about a specific transaction
+   - Input: transaction_hash (hash of the transaction)
+   - Output: JSON-formatted transaction details
+
+8. **get_book_offers**: Retrieve order book offers for a currency pair
+   - Input:
+     - taker_gets (currency the taker wants to receive)
+     - taker_pays (currency the taker wants to pay)
+     - limit (optional, number of offers to return)
+   - Output: JSON-formatted order book offers
+
+All tools have detailed documentation to guide LLMs on appropriate usage.
 
 ### Technology Stack
 
@@ -85,12 +125,46 @@ The tool has detailed documentation to guide LLMs on appropriate usage.
    XRPL_CLIENT = AsyncJsonRpcClient(XRPL_NODE_URL)
    ```
 
-3. **get_account_info**: Tool for retrieving account data
+3. **Account Information Tools**: Tools for retrieving account data
    ```python
    @mcp.tool()
    async def get_account_info(address: str) -> str:
        request = AccountInfo(account=address)
        # Process request and return formatted response
+       
+   @mcp.tool()
+   async def get_account_lines(address: str, peer: str = None, limit: int = None) -> str:
+       # Process request and return JSON response
+       
+   @mcp.tool()
+   async def get_account_nfts(address: str, limit: int = None) -> str:
+       # Process request and return JSON response
+       
+   @mcp.tool()
+   async def get_account_transactions(address: str, limit: int = None, binary: bool = False, forward: bool = False) -> str:
+       # Process request and return JSON response
+   ```
+
+4. **Transaction Tools**: Tools for transaction operations
+   ```python
+   @mcp.tool()
+   async def submit_transaction(tx_blob: str) -> str:
+       # Process request and return JSON response
+       
+   @mcp.tool()
+   async def get_transaction_info(transaction_hash: str) -> str:
+       # Process request and return JSON response
+   ```
+
+5. **Market Data Tools**: Tools for market and server data
+   ```python
+   @mcp.tool()
+   async def get_book_offers(taker_gets: dict, taker_pays: dict, limit: int = None) -> str:
+       # Process request and return JSON response
+       
+   @mcp.tool()
+   async def get_server_info() -> str:
+       # Process request and return JSON response
    ```
 
 ### Environment Configuration
@@ -100,8 +174,12 @@ Required environment variables:
 
 ### Response Formatting
 
-The tool formats responses in a structured way:
+The tools format responses in a structured way:
 1. **Get Account Information**: Account address, XRP balance, and sequence number
+2. **Trust Lines and NFTs**: JSON-formatted detailed information
+3. **Transaction Data**: JSON-formatted transaction details
+4. **Order Book Data**: JSON-formatted order offers
+5. **Server Information**: JSON-formatted server status
 
 ## Testing Strategy
 
@@ -120,6 +198,8 @@ The tool formats responses in a structured way:
 3. Webhook notifications for ledger events
 4. Extended authentication options
 5. Support for WebSocket connections
+6. Better human-readable formatting for JSON responses
+7. Transaction building and local signing capabilities
 
 ## Integration Guidelines
 
