@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xrpl-mcp-server"
+description = "A Model Context Protocol (MCP) server for the XRP Ledger"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dynamic = ["version"]
+authors = [
+    { name = "Louis-Guillaume Carrier-Bédard", email = "lgcarrier@gmail.com" },
+]
+dependencies = [
+    "mcp",
+    "xrpl-py",
+    "fastapi>=0.95.0",
+    "uvicorn>=0.21.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.3.1",
+    "black>=23.3.0",
+    "isort>=5.12.0",
+    "mypy>=1.2.0",
+    "flake8>=6.0.0",
+]
+
+[project.urls]
+Repository = "https://github.com/lgcarrier/xrpl-mcp-server"
+Documentation = "https://github.com/lgcarrier/xrpl-mcp-server#readme"
+
+[project.scripts]
+xrpl-mcp-server = "xrpl_mcp_server.__main__:main"
+
+[tool.setuptools]
+packages = ["xrpl_mcp_server"]
+package-dir = {"" = "src"}
+
+[tool.setuptools_scm]
+write_to = "src/xrpl_mcp_server/_version.py"
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"

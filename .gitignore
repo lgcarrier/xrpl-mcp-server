@@ -20,9 +20,11 @@ parts/
 sdist/
 var/
 wheels/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
 # PyInstaller
 *.manifest
@@ -35,14 +37,17 @@ pip-delete-this-directory.txt
 # Unit test / coverage reports
 htmlcov/
 .tox/
+.nox/
 .coverage
 .coverage.*
 .cache
 nosetests.xml
 coverage.xml
 *.cover
+*.py,cover
 .hypothesis/
 .pytest_cache/
+cover/
 
 # Translations
 *.mo
@@ -52,6 +57,7 @@ coverage.xml
 *.log
 local_settings.py
 db.sqlite3
+db.sqlite3-journal
 
 # Flask stuff:
 instance/
@@ -65,15 +71,36 @@ docs/_build/
 
 # PyBuilder
 target/
+.pybuilder/
 
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# IPython
+profile_default/
+ipython_config.py
+
 # pyenv
 .python-version
+.python-version-*
 
-# celery beat schedule file
+# pipenv
+Pipfile.lock
+
+# Poetry
+poetry.lock
+.poetry/
+
+# pdm
+.pdm.toml
+__pypackages__/
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
 celerybeat-schedule
+celerybeat.pid
 
 # SageMath parsed files
 *.sage.py
@@ -99,12 +126,28 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# ruff
+.ruff_cache/
 
 # IDE files
 .idea/
 .vscode/
 *.swp
 *.swo
+*.sublime-workspace
+*.sublime-project
 
 # OS generated files
 .DS_Store
@@ -114,3 +157,56 @@ venv.bak/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Generated version files
+src/xrpl_mcp_server/_version.py
+
+# Local development
+*.db
+*.sqlite3
+*.log
+logs/
+tmp/
+
+# dotenv
+.env
+.env.*
+!.env.example
+
+# Profiling data
+prof/
+*.prof
+
+# Backup files
+*.bak
+*~
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# XRP Ledger specific
+wallet.json
+credentials.json
+secrets/
+
+# Virtual environments - extended
+.venv/
+venv/
+virtualenv/
+.direnv/
+
+# Pytest
+.pytest_cache/
+pytest.ini
+
+# Jupyter
+.jupyter/
+notebooks/.ipynb_checkpoints/
+
+# Debug files
+.gdb_history
+
+# Package managers
+# Note: uv.lock should be committed to ensure reproducible builds
+# !uv.lock
